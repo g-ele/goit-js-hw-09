@@ -8,3 +8,123 @@ body {
   margin: 0;
   font-family: system-ui, sans-serif;
 }
+/* Контейнер галереї — скидаємо стандартні маркери списку */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 колонки однакової ширини */
+  gap: 24px;                             /* Відступи між картками згідно з ТЗ */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 1128px;                     /* Стандартна ширина контенту в макетах GoIT */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Елемент списку */
+.gallery-item {
+  width: 100%;
+}
+
+/* Посилання (обгортка для картинки) */
+.gallery-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;                       /* Курсор у вигляді лупи при наведенні */
+}
+
+/* Сама картинка */
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 200px;                         /* Фіксована висота з макету Figma */
+  object-fit: cover;                     /* Щоб картинки не деформувалися */
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1); /* Плавний ефект */
+}
+
+/* Ефект при наведенні мишки на картинку (Hover) */
+.gallery-link:hover .gallery-image {
+  transform: scale(1.04);                /* Легке збільшення картинки */
+}
+
+/* Контейнер форми */
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;                     /* Відступи між елементами форми */
+  max-width: 408px;              /* Стандартна ширина форми з макетів */
+  margin: 40px auto;             /* Центрування форми на сторінці */
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Легка елегантна тінь */
+  font-family: "Montserrat", sans-serif; /* Сучасний шрифт */
+}
+
+/* Обгортка для лейбла та інпута */
+.feedback-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                      /* Відступ між текстом підпису та полем */
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2e2f42;                /* Темно-сірий колір тексту */
+}
+
+/* Загальні стилі для полів введення (input та textarea) */
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2e2f42;
+  background-color: transparent;
+  border: 1px solid #808080;     /* Стандартна сіра рамка */
+  border-radius: 4px;
+  outline: none;                 /* Прибираємо дефолтну рамку браузера */
+  /* Плавна зміна кольору рамки при взаємодії */
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Фіксована висота для текстового поля з можливістю вертикального розширення */
+.feedback-form textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+/* Ефект при фокусі (коли користувач клікає в поле для введення тексту) */
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  border-color: #4d5ae5;         /* Фірмовий синій колір GoIT */
+}
+
+/* Стилізація підказки (placeholder) */
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder {
+  color: #808080;
+  font-size: 16px;
+}
+
+/* Стилі для кнопки відправки */
+.feedback-form button {
+  align-self: flex-start;        /* Кнопка займає лише свою ширину, а не всю форму */
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  background-color: #4d5ae5;     /* Колір кнопки */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  /* Плавний ефект переходу кольору фону */
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ефект при наведенні мишки на кнопку (Hover) */
+.feedback-form button:hover {
+  background-color: #404bbf;     /* Більш насичений синій колір */
+}
