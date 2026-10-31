@@ -1,61 +1,61 @@
+// Пошук форми та оголошення об'єкта стану з НАЛЕЖНИМ ідентифікатором formData
 const form = document.querySelector('.feedback-form');
-const formState = { email: "", message: "" };
+const formData = { email: "", message: "" };
 
 const STORAGE_KEY = "feedback-form-state";
 
-// Підзадача 2: Перевірка локального сховища при завантаженні сторінки
+// Перевірка локального сховища при завантаженні сторінки
 function populateForm() {
   const savedData = localStorage.getItem(STORAGE_KEY);
 
-  // Якщо дані у сховищі є, заповнюємо форму та об'єкт стану
   if (savedData) {
     try {
       const parsedData = JSON.parse(savedData);
       
-      // Оновлюємо наш об'єкт стану актуальними значеннями
-      formState.email = parsedData.email ?? "";
-      formState.message = parsedData.message ?? "";
+      // Оновлюємо об'єкт formData актуальними значеннями
+      formData.email = parsedData.email ?? "";
+      formData.message = parsedData.message ?? "";
       
-      // Заповнюємо поля в інтерфейсі (використовуємо trim, щоб прибрати зайві пробіли)
-      form.elements.email.value = formState.email;
-      form.elements.message.value = formState.message;
+      // Заповнюємо поля в інтерфейсі
+      form.elements.email.value = formData.email;
+      form.elements.message.value = formData.message;
     } catch (error) {
       console.error("Помилка парсингу даних з localStorage:", error);
     }
   }
 }
 
-// Запускаємо перевірку сховища одразу при завантаженні скрипта
+// Запускаємо перевірку сховища одразу
 populateForm();
 
-// Підзадача 3: Відстеження змін через делегування подій (input)
+// Відстеження змін через делегування подій (input)
 form.addEventListener('input', (event) => {
-  const key = event.target.name; // Отримуємо 'email' або 'message'
-  const value = event.target.value.trim(); // Очищаємо введене значення від пробілів по краях
+  const key = event.target.name; 
+  const value = event.target.value.trim(); 
 
-  // Зберігаємо актуальні дані в об'єкт стану
-  formState[key] = value;
+  // Зберігаємо актуальні дані в об'єкт formData
+  formData[key] = value;
 
   // Записуємо оновлений об'єкт у локальне сховище
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formState));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 });
 
-// Підзадача 4: Обробка відправлення форми (submit) та валідація
+// Обробка відправлення форми (submit) та валідація
 form.addEventListener('submit', (event) => {
   event.preventDefault(); // Скасовуємо перезавантаження сторінки
 
-  // Перевіряємо, чи обидва поля заповнені (без урахування випадкових пробілів)
-  if (!formState.email || !formState.message) {
+  // Перевіряємо, чи обидва поля заповнені
+  if (!formData.email || !formData.message) {
     alert('Fill please all fields');
-    return; // Зупиняємо виконання функції, якщо хоча б одне поле порожнє
+    return; 
   }
 
-  // Якщо все заповнено, виводимо об'єкт у консоль
-  console.log(formState);
+  // Якщо все заповнено, виводимо об'єкт formData у консоль
+  console.log(formData);
 
   // Повне очищення після успішного відправлення
   localStorage.removeItem(STORAGE_KEY); // Видаляємо дані зі сховища
-  formState.email = "";                 // Скидаємо значення в об'єкті
-  formState.message = "";
+  formData.email = "";                 // Скидаємо значення в об'єкті
+  formData.message = "";
   form.reset();                         // Очищаємо поля форми в інтерфейсі
 });
